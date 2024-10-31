@@ -50,7 +50,7 @@ This project contains two Scrapy spiders for scraping movie data from IMDb and T
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/imdb-scraper.git
+   git clone https://github.com/WhoIsJayD/imdb-scraper.git
    cd imdb-scraper
    ```
 
