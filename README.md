@@ -40,7 +40,7 @@ This project contains two Scrapy spiders for scraping movie data from IMDb and T
 
 ## Requirements
 
-- Python 3.7+
+- Python 3.10+
 - Scrapy
 - Selenium
 - requests
@@ -50,8 +50,8 @@ This project contains two Scrapy spiders for scraping movie data from IMDb and T
 
 1. Clone the repository:
    ```
-   git clone https://github.com/WhoIsJayD/imdb-scraper.git
-   cd imdb-scraper
+   git clone https://github.com/WhoIsJayD/IMDB-Scrapper
+   cd IMDB-Scrapper
    ```
 
 2. Install the required packages:
