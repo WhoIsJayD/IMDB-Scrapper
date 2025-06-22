@@ -2,46 +2,44 @@
 
 [![License: MIT](https://img.shields.io/github/license/WhoIsJayD/IMDB-Scrapper)](https://github.com/WhoIsJayD/IMDB-Scrapper/blob/main/LICENSE.md)
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/downloads/)
-[![GitHub issues](https://img.shields.io/github/issues/WhoIsJayD/IMDB-Scrapper)](https://github.com/WhoIsJayD/IMDB-Scrapper/issues)
+[![GitHub Issues](https://img.shields.io/github/issues/WhoIsJayD/IMDB-Scrapper)](https://github.com/WhoIsJayD/IMDB-Scrapper/issues)
 [![Scrapy](https://img.shields.io/badge/built%20with-Scrapy-green)](https://scrapy.org/)
+![Visitor Badge](https://visitor-badge.laobi.icu/badge?page_id=https://github.com/WhoIsJayD/IMDB-Scrapper)
 
-A powerful Scrapy project designed to efficiently scrape movie and TV series data from IMDb, enriching it with additional details from the TMDb API. This repository offers two distinct spiders: a straightforward **basic scraper** for simple tasks and a high-performance **advanced scraper** for large-scale, concurrent data collection.
+A robust Scrapy-based tool for scraping movie and TV series data from IMDb, enriched with detailed metadata from the TMDb API. This project provides two spiders: a **basic scraper** for small-scale tasks and an **advanced scraper** optimized for high-performance, concurrent data collection.
 
-## 🌟 Key Features
+## 🌟 Features
 
-This project is packed with features to make movie data scraping flexible and powerful.
+### Core Functionality
+- **Dual-Source Data**: Scrapes IMDb for initial movie data and enhances it with rich metadata from the TMDb API.
+- **Comprehensive Data**: Collects titles, ratings, genres, cast, crew, posters, budgets, and more.
+- **Flexible Outputs**: Exports data to `movies.json` and `movies.csv` formats.
+- **Data Cleaning**: Ensures consistent and reliable data through built-in processing logic.
 
-#### General
-- **Dual Source Scraping**: Extracts initial data from IMDb search pages and enriches it with a wealth of information from the TMDb API.
-- **Rich Data Collection**: Gathers a wide range of data points including ratings, metadata, posters, cast, crew, and more.
-- **Multiple Output Formats**: Automatically saves scraped data into both `movies.json` and `movies.csv` files.
-- **Data Cleaning**: Includes logic to process and clean data for consistency.
+### Advanced Scraper (`advance_scrapper.py`)
+- **High Concurrency**: Uses `ThreadPoolExecutor` for parallel scraping, boosting performance.
+- **Customizable Range**: Targets specific release years (`start_year`, `end_year`).
+- **Robust Error Handling**: Employs `requests.Session` with automatic retries for stability.
+- **Task Management**: Organizes scraping by year/month using a queue for efficiency.
+- **Dynamic Content**: Handles JavaScript-rendered pages and pagination with Selenium.
+- **Optimized Settings**: Fine-tuned Scrapy configurations for throttling and performance.
 
-#### `advance_scrapper.py`
-- **High-Concurrency**: Utilizes `ThreadPoolExecutor` to run multiple scraping instances in parallel, dramatically speeding up data collection.
-- **Customizable Scraping Range**: Specify the exact date range (`start_year`, `end_year`) for targeted scraping.
-- **Robust Error Handling**: Implements a resilient `requests.Session` with automatic retries on failed requests or server errors.
-- **Efficient Task Management**: Uses a queue to manage scraping tasks by year and month, ensuring complete and orderly data collection.
-- **Dynamic Page Loading**: Leverages Selenium to handle dynamically loaded content and "Show More" pagination on IMDb.
-- **Fine-tuned Scrapy Settings**: Comes with optimized settings for performance, throttling, and request management.
-
-#### `basic_scrapper.py`
-- **Simplicity**: An easy-to-use spider perfect for smaller scraping tasks or for understanding the core logic.
-- **Selenium Integration**: Also uses Selenium to navigate and scrape JavaScript-rendered pages.
-- **TMDb Integration**: Fetches additional data from TMDb for each movie found.
+### Basic Scraper (`basic_scrapper.py`)
+- **User-Friendly**: Ideal for small-scale scraping or learning the project's logic.
+- **Selenium Support**: Navigates dynamic IMDb pages with ease.
+- **TMDb Enrichment**: Fetches additional metadata for each scraped movie.
 
 ## 📂 Project Structure
 
 ```plaintext
-.
 ├── imdbscrapper
 │   ├── spiders
-│   │   ├── advance_scrapper.py  # Advanced, concurrent spider
-│   │   ├── basic_scrapper.py    # Simple, sequential spider
-│   ├── items.py
-│   ├── middlewares.py
-│   ├── pipelines.py
-│   └── settings.py
+│   │   ├── advance_scrapper.py  # High-performance spider
+│   │   ├── basic_scrapper.py    # Simple spider
+│   ├── items.py                 # Data models
+│   ├── middlewares.py           # Custom middleware
+│   ├── pipelines.py             # Data processing pipeline
+│   └── settings.py              # Scrapy configurations
 ├── LICENSE.md
 ├── README.md
 ├── requirements.txt
@@ -51,108 +49,125 @@ This project is packed with features to make movie data scraping flexible and po
 
 ## 🛠️ Getting Started
 
-Follow these instructions to get the project up and running on your local machine.
-
 ### Prerequisites
-
 - Python 3.10+
-- Google Chrome browser installed
-- [ChromeDriver](https://googlechromelabs.github.io/chrome-for-testing/) matching your Chrome version
+- Google Chrome browser
+- [ChromeDriver](https://googlechromelabs.github.io/chrome-for-testing/) (matching your Chrome version)
+- TMDb API key ([sign up here](https://www.themoviedb.org/signup))
 
 ### Installation
 
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/WhoIsJayD/IMDB-Scrapper.git](https://github.com/WhoIsJayD/IMDB-Scrapper.git)
-    cd IMDB-Scrapper
-    ```
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/WhoIsJayD/IMDB-Scrapper.git
+   cd IMDB-Scrapper
+   ```
 
-2.  **Install dependencies:**
-    Create a virtual environment (recommended) and install the required packages.
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    pip install -r requirements.txt
-    ```
+2. **Set Up a Virtual Environment** (recommended):
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   ```
 
-3.  **Set up ChromeDriver:**
-    Ensure the ChromeDriver executable is in your system's `PATH`.
+3. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-4.  **Set up TMDb API Key:**
-    You will need an API key from [TMDb](https://www.themoviedb.org/signup). Once you have your key, you can pass it as an argument when running the spider.
+4. **Configure ChromeDriver**:
+   Ensure ChromeDriver is installed and added to your system's `PATH`.
+
+5. **Obtain TMDb API Key**:
+   Register on TMDb to get your API key, which is required for running the spiders.
 
 ## ⚙️ Usage
 
-You can run either the basic or the advanced scraper.
-
-### Basic Scraper
-Run the basic scraper to collect a limited set of data from a predefined start URL.
+### Running the Basic Scraper
+For small-scale scraping tasks:
 ```bash
 scrapy crawl basic_scrapper -a tmdb_api_key="YOUR_TMDB_API_KEY"
 ```
 
-### Advanced Scraper
-The advanced scraper is highly recommended for its speed and configurability.
+### Running the Advanced Scraper
+For large-scale, high-performance scraping:
 ```bash
 scrapy crawl advance_scrapper -a tmdb_api_key="YOUR_TMDB_API_KEY" -a start_year=2020 -a end_year=2023 -a num_instances=5
 ```
 
-#### Configuration Options (`advance_scrapper`)
-- **`tmdb_api_key`**: (Required) Your API key for TMDb.
-- **`start_year`**: The first year of the release date range to scrape.
-- **`end_year`**: The last year of the release date range to scrape.
-- **`num_instances`**: The number of concurrent browser instances to run. A higher number leads to faster scraping but consumes more resources.
+#### Advanced Scraper Options
+- `-a tmdb_api_key`: Your TMDb API key (required).
+- `-a start_year`: Starting release year (e.g., 2020).
+- `-a end_year`: Ending release year (e.g., 2023).
+- `-a num_instances`: Number of concurrent browser instances (default: 5; adjust based on system resources).
 
 ## 📁 Output Data Schema
 
-The scrapers produce `movies.json` and `movies.csv` files with the following fields:
+The scraped data is saved in `movies.json` and `movies.csv` with the following fields:
 
-| Field | Description | Source |
-| :--- | :--- | :--- |
-| `title` | The movie title. | TMDb / IMDb |
-| `original_title`| The original title, if different. | TMDb |
-| `imdb_id` | Unique IMDb identifier (e.g., `tt0111161`). | IMDb |
-| `tmdb_id` | Unique TMDb identifier. | TMDb |
-| `year` | Release year noted on IMDb. | IMDb |
-| `release_date`| The full release date (YYYY-MM-DD). | TMDb |
-| `runtime` | Movie runtime in minutes. | TMDb |
-| `poster_path` | Full URL to the movie poster image. | TMDb |
-| `backdrop_path`| Full URL to the backdrop image. | TMDb |
-| `homepage` | Link to the movie's official homepage. | TMDb |
-| `imdb_rating` | IMDb user rating. | IMDb |
-| `imdb_votes` | Number of votes for the IMDb rating. | IMDb |
-| `imdb_metascore`| Metacritic score. | IMDb |
-| `tmdb_vote_average`| TMDb user rating average. | TMDb |
-| `tmdb_vote_count`| Number of votes for the TMDb rating. | TMDb |
-| `genres` | List of genres associated with the movie. | TMDb |
-| `overview` | A brief plot summary. | TMDb |
-| `tagline` | The movie's tagline. | TMDb |
-| `budget` | Production budget in USD. | TMDb |
-| `revenue` | Worldwide revenue in USD. | TMDb |
-| `production_companies` | List of production companies. | TMDb |
-| `production_countries` | List of production countries. | TMDb |
-| `spoken_languages` | List of spoken languages. | TMDb |
-| `cast` | List of the top 10 cast members. | TMDb |
-| `crew` | List of top 10 crew members. | TMDb |
-| `keywords` | List of keywords associated with the movie. | TMDb |
-| `trailer_link`| A YouTube link to the movie trailer. | TMDb |
-| `scraped_at` | Timestamp of when the data was scraped. | Scraper |
+| Field                  | Description                              | Source    |
+|------------------------|------------------------------------------|-----------|
+| `title`                | Movie title                              | IMDb/TMDb |
+| `original_title`       | Original title (if different)            | TMDb      |
+| `imdb_id`              | IMDb ID (e.g., `tt0111161`)              | IMDb      |
+| `tmdb_id`              | TMDb ID                                  | TMDb      |
+| `year`                 | Release year                             | IMDb      |
+| `release_date`         | Full release date (YYYY-MM-DD)           | TMDb      |
+| `runtime`              | Runtime in minutes                       | TMDb      |
+| `poster_path`          | URL to poster image                      | TMDb      |
+| `backdrop_path`        | URL to backdrop image                    | TMDb      |
+| `homepage`             | Official website URL                     | TMDb      |
+| `imdb_rating`          | IMDb user rating                         | IMDb      |
+| `imdb_votes`           | Number of IMDb votes                     | IMDb      |
+| `imdb_metascore`       | Metacritic score                         | IMDb      |
+| `tmdb_vote_average`    | TMDb average rating                      | TMDb      |
+| `tmdb_vote_count`      | Number of TMDb votes                     | TMDb      |
+| `genres`               | List of genres                           | TMDb      |
+| `overview`             | Plot summary                             | TMDb      |
+| `tagline`              | Movie tagline                            | TMDb      |
+| `budget`               | Production budget (USD)                  | TMDb      |
+| `revenue`              | Worldwide revenue (USD)                  | TMDb      |
+| `production_companies` | List of production companies             | TMDb      |
+| `production_countries` | List of production countries             | TMDb      |
+| `spoken_languages`     | List of spoken languages                 | TMDb      |
+| `cast`                 | Top 10 cast members                      | TMDb      |
+| `crew`                 | Top 10 crew members                      | TMDb      |
+| `keywords`             | List of keywords                         | TMDb      |
+| `trailer_link`         | YouTube trailer URL                      | TMDb      |
+| `scraped_at`           | Timestamp of data collection             | Scraper   |
+
+## 🛠️ Troubleshooting
+
+- **ChromeDriver Issues**: Ensure ChromeDriver matches your Chrome browser version. Check the [Chrome for Testing](https://googlechromelabs.github.io/chrome-for-testing/) page for compatible versions.
+- **TMDb API Errors**: Verify your API key and ensure you haven't exceeded TMDb's rate limits.
+- **Performance Issues**: Reduce `num_instances` in the advanced scraper if your system struggles with high concurrency.
+- **Missing Data**: Check IMDb and TMDb pages manually to confirm data availability, as some fields may be absent.
+
+## 🤝 Contributing
+
+Contributions are welcome! To contribute:
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -m "Add your feature"`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a pull request.
+
+Please report issues or suggest improvements via the [GitHub Issues](https://github.com/WhoIsJayD/IMDB-Scrapper/issues) page.
 
 ## ⚠️ Disclaimer
 
-This tool is intended for educational purposes only. Please respect the terms of service of both IMDb and TMDb. Be responsible and avoid overwhelming their servers by keeping scraping rates reasonable.
+This tool is for **educational purposes only**. Respect IMDb and TMDb's terms of service, and avoid excessive scraping that could overload their servers. Use reasonable request rates and comply with all applicable laws.
 
 ## 📝 License
 
-This project is licensed under the MIT License. See the [LICENSE.md](LICENSE.md) file for details.
+Licensed under the [MIT License](LICENSE.md).
 
 ## 📞 Contact
 
-Jaydeep Solanki - [jaydeep.solankee@yahoo.com](mailto:contactjaydeepsolanki@gmail.com)
-
-Project Link: [https://github.com/WhoIsJayD/IMDB-Scrapper](https://github.com/WhoIsJayD/IMDB-Scrapper)
+- **Author**: Jaydeep Solanki
+- **Email**: [jaydeep.solankee@yahoo.com](mailto:jaydeep.solankee@yahoo.com)
+- **Project**: [https://github.com/WhoIsJayD/IMDB-Scrapper](https://github.com/WhoIsJayD/IMDB-Scrapper)
 
 ## 🙌 Acknowledgments
 
-- Special thanks to **IMDb** and **TMDb** for providing the data.
-- The **Scrapy** and **Selenium** communities for their fantastic tools.
+- **IMDb** and **TMDb** for providing valuable data.
+- **Scrapy** and **Selenium** communities for their powerful tools.
