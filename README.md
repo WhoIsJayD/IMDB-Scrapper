@@ -164,7 +164,7 @@ Licensed under the [MIT License](LICENSE.md).
 ## 📞 Contact
 
 - **Author**: Jaydeep Solanki
-- **Email**: [jaydeep.solankee@yahoo.com](mailto:jaydeep.solankee@yahoo.com)
+- **Email**: [contactjaydeepsolanki@gmail.com](mailto:contactjaydeepsolanki@gmail.com)
 - **Project**: [https://github.com/WhoIsJayD/IMDB-Scrapper](https://github.com/WhoIsJayD/IMDB-Scrapper)
 
 ## 🙌 Acknowledgments
